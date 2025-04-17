@@ -26,11 +26,13 @@ clean-targets:
 
 models:
   dubsrepo:
-    +materialized: table
     stg:
-      +schema: dubsrepo_stg # staging dataset
+      +materialized: table
+      +schema: dbt_dubsrepo_stg # staging dataset
     int:
-      +schema: dubsrepo_int # intermediate dataset
+      +materialized: table
+      +schema: dbt_dubsrepo_int # intermediate dataset
     mrt:
-      +schema: dubsrepo_mrt # mart/final dataset
+      +materialized: table
+      +schema: dbt_dubsrepo_mrt # mart/final dataset
 
