@@ -3,6 +3,7 @@
 # name or the intended use of these models
 name: "dubsrepo"
 version: "1.0"
+config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
 profile: "dubsrepo"
@@ -27,11 +28,11 @@ models:
   dubsrepo:
     stg:
       +materialized: table
-      +schema: dubsrepo_stg # staging dataset
+      +schema: dbt_dubsrepo_stg # staging dataset
     int:
       +materialized: table
-      +schema: dubsrepo_int # intermediate dataset
+      +schema: dbt_dubsrepo_int # intermediate dataset
     mrt:
       +materialized: table
-      +schema: dubsrepo_mrt # mart/final dataset
+      +schema: dbt_dubsrepo_mrt # mart/final dataset
 
