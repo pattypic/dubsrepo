@@ -29,10 +29,10 @@ models:
     stg:
       +materialized: table
       +schema: dbt_dubsrepo_stg # staging dataset
-    # int:
-    #   +materialized: table
-    #   +schema: dbt_dubsrepo_int # intermediate dataset
-    # mrt:
-    #   +materialized: table
-    #   +schema: dbt_dubsrepo_mrt # mart/final dataset
+    int:
+      +materialized: table
+      +schema: dbt_dubsrepo_int # intermediate dataset
+    mrt:
+      +materialized: table
+      +schema: dbt_dubsrepo_mrt # mart/final dataset
 
