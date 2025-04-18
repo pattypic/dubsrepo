@@ -1,0 +1,16 @@
+
+
+sources:
+  - name: dubsrepo_int
+    database: dubsrepo
+    schema: dubsrepo_int
+    tables:
+      - name: extracted_cities_with_density
+      - name: zillow_1BR
+      - name: zillow_2BR
+      - name: zillow_3BR
+      - name: zillow_4BR
+      - name: zillow_5BR
+
+      - name: zillow_indicators
+      - name: zillow_regions	
