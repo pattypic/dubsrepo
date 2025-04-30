@@ -1,0 +1,33 @@
+{% macro build_region_tables() -%}
+    {%- set zillow_tbl = ref('zillow_1BR') -%}
+
+    {%- set region_rows = run_query(
+        "SELECT DISTINCT "
+      ~ "REGEXP_REPLACE(region, r'[^A-Za-z0-9_]', '_') AS region_safe, "
+      ~ "region AS region_raw "
+      ~ "FROM " ~ zillow_tbl
+    ).rows -%}
+
+    {%- for r in region_rows -%}
+        {%- set region_safe = r['region_safe'] -%}
+        {%- set region_raw  = r['region_raw']  -%}
+
+        {%- set sql -%}
+            CREATE OR REPLACE TABLE
+                `{{ target.project }}.dubsrepo_int.Zillow_1BR_Region_{{ region_safe }}` AS
+            SELECT
+                indicator,
+                date,
+                value,
+                'Zillow_1BR_Region_{{ region_safe }}' AS _data_source,
+                CURRENT_TIMESTAMP()                   AS load_time
+            FROM {{ zillow_tbl }}
+            WHERE region = '{{ region_raw }}';
+        {%- endset -%}
+
+        {%- do run_query(sql) -%}
+        {{ log("✓ built table for region: " ~ region_raw, info=True) }}
+
+    {%- endfor -%}
+
+{%- endmacro %}
